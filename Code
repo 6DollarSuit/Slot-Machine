@@ -1,0 +1,52 @@
+'SETUP
+CLS
+OPTION BASE 1
+RANDOMIZE TIMER
+Money% = 100
+
+'RETURN HERE EVERY SPIN
+Start:
+IF Money% < 10 THEN GOTO Loser
+INPUT "Are you feeling lucky? (1 for yes)"; Choice%
+CLS
+IF Choice% <> 1 THEN GOTO Smart
+
+'BEGIN SPINNING
+Money% = Money% - 10
+
+FOR spin% = 1 TO 10
+    _DELAY 0.5
+    A% = (RND * 8) + 1
+    B% = (RND * 8) + 1
+    C% = (RND * 8) + 1
+    CLS
+    PRINT "#############"
+    PRINT "|"; A%; "|"; B%; "|"; C%; "|"
+    PRINT "#############"
+    PRINT ""
+NEXT
+
+'PRIZES
+IF A% = B% = C% THEN PRINT "WIN!!!": Money% = Money% + 500
+IF A% = B% THEN PRINT "Win!!": Money% = Money% + 50
+IF B% = C% THEN PRINT "Win!!": Money% = Money% + 50
+IF A% = C% THEN PRINT "Win!": Money% = Money% + 25
+
+'Results
+PRINT "You have $"; Money%; " remaining."
+GOTO Start
+
+
+Loser:
+PRINT "Completely broke, you're cursed to spend the rest of your days wandering Las Vegas as a homeless harmonica-player!"
+END
+
+Smart:
+CLS
+PRINT "You walk away with a cool $"; Money%; " in your wallet!"
+IF Money% < 15 THEN PRINT "You're just glad you knew when to walk away,"
+IF Money% > 15 THEN PRINT "It's enough for a large pizza," '~$15 for a large pizza in las vegas
+IF Money% > 45 THEN PRINT "WITH EVERYTHING ON IT!!! The taste is incredible," '~$30 for BBQ Chicken pizza at ceasars apparently
+IF Money% > 145 THEN PRINT "You have enough to pay for an extra night at the bargain hotel," '+$100
+PRINT "and you leave Las Vegas with happy memories."
+END
